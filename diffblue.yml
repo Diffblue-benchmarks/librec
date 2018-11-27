@@ -6,15 +6,14 @@ cbmcArguments:
   java-generate-no-comments: true
 units:
   - target:
-    - dir:
-      file: librec/librec/target/classes/librec/data/DenseMatrix.class
-      sourceDir:
-      sourceFile: librec/librec/src/main/java/librec/data/DenseMatrix.java
+    - dir: target/classes
+      file: librec/data/DenseMatrix.class
+      sourceDir: src/main/java
+      sourceFile: librec/data/DenseMatrix.java
 phases:
 -
   timeout: 300
   cbmcArguments:
-    classpath: '/tools/cbmc/models-simple-overlay.jar:/tools/cbmc/models.jar:.'
     java-assume-inputs-non-null: true
     max-nondet-array-length: 10
     string-non-empty: true
