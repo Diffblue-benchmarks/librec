@@ -2,11 +2,8 @@
 # It is a combination of the local diffblue-base.yml and the yml file in dashboard/scripts/update-diffblue-yml
 # Do not change any of the values manually to keep options uniform across all benchmarks
 buildCmd: cd librec; mvn -e -X -Dmaven.test.skip=true compile
-testCmd: 'true'
-ignoreExistingCoverage: true
-skipVerification: true
-staticValuesJson: true
 cbmcArguments:
+  java-version: 7
   java-max-vla-length: 100000
   depth: false
   java-test-input-factory: false
@@ -19,6 +16,10 @@ cbmcArguments:
   inline-into-assertion: true
   inline-function-arguments: true
   no-reflective-asserts: true
+testCmd: 'true'
+ignoreExistingCoverage: true
+skipVerification: true
+staticValuesJson: true
 phases:
   - timeout: 150
     cbmcArguments:
@@ -58,7 +59,7 @@ phases:
       throw-runtime-exceptions: false
       unwind: 1
     nextPhase:
-      time_out: 5
+      time_out: 8
   - timeout: 150
     cbmcArguments:
       classpath: '/tools/cbmc/models-simple-overlay.jar:/tools/cbmc/models.jar:.'
@@ -70,7 +71,43 @@ phases:
       throw-runtime-exceptions: false
       unwind: 2
     nextPhase:
-      time_out: 5
+      time_out: 8
+  - timeout: 150
+    cbmcArguments:
+      classpath: '/tools/cbmc/models.jar:.'
+      java-assume-inputs-non-null: false
+      max-nondet-array-length: 30
+      max-nondet-string-length: 100
+      string-printable: false
+      java-assume-inputs-integral: false
+      throw-runtime-exceptions: false
+      unwind: 4
+    nextPhase:
+      time_out: 8
+  - timeout: 150
+    cbmcArguments:
+      classpath: '/tools/cbmc/models.jar:.'
+      java-assume-inputs-non-null: false
+      max-nondet-array-length: 30
+      max-nondet-string-length: 100
+      string-printable: false
+      java-assume-inputs-integral: false
+      throw-runtime-exceptions: false
+      unwind: 8
+    nextPhase:
+      time_out: 8
+  - timeout: 150
+    cbmcArguments:
+      classpath: '/tools/cbmc/models.jar:.'
+      java-assume-inputs-non-null: false
+      max-nondet-array-length: 30
+      max-nondet-string-length: 100
+      string-printable: false
+      java-assume-inputs-integral: false
+      throw-runtime-exceptions: false
+      unwind: 16
+    nextPhase:
+      time_out: 8
   - timeout: 150
     cbmcArguments:
       classpath: '/tools/cbmc/models.jar:.'
